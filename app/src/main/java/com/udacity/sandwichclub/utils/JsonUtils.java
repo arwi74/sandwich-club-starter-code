@@ -36,24 +36,24 @@ public class JsonUtils {
             JSONObject fullJsonSandwich = new JSONObject(json);
 
             JSONObject name = fullJsonSandwich.getJSONObject(NAME);
-            String mainName = name.getString(MAIN_NAME);
+            String mainName = name.optString(MAIN_NAME);
             JSONArray alsoKnownAsJson = name.getJSONArray(ALSO_KNOWN_AS);
 
             List<String> alsoKnownAs = new ArrayList<>();
 
             for ( int i=0;i<alsoKnownAsJson.length();i++){
-                alsoKnownAs.add( alsoKnownAsJson.getString(i) );
+                alsoKnownAs.add( alsoKnownAsJson.optString(i) );
             }
 
-            String placeOfOrigin = fullJsonSandwich.getString(PLACE_OF_ORIGIN);
-            String description = fullJsonSandwich.getString(DESCRIPTION);
-            String image = fullJsonSandwich.getString(IMAGE);
+            String placeOfOrigin = fullJsonSandwich.optString(PLACE_OF_ORIGIN);
+            String description = fullJsonSandwich.optString(DESCRIPTION);
+            String image = fullJsonSandwich.optString(IMAGE);
             JSONArray ingredientsJson = fullJsonSandwich.getJSONArray(INGREDIENTS);
 
             List<String> ingredients = new ArrayList<>();
 
             for ( int i=0;i<ingredientsJson.length();i++){
-                ingredients.add( ingredientsJson.getString(i) );
+                ingredients.add( ingredientsJson.optString(i) );
             }
 
             return new Sandwich(mainName,alsoKnownAs,placeOfOrigin,description,image,ingredients);
@@ -64,4 +64,5 @@ public class JsonUtils {
 
         return null;
     }
+
 }
